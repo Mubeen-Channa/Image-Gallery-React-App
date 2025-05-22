@@ -38,6 +38,36 @@ const App = () => {
   return (
     <div className="container py-4">
       <h2 className="text-center text-black mb-4">📸 Image Gallery</h2>
+
+      <form onSubmit={handleSearch} className="d-flex justify-content-center mb-4">
+        <input
+          className="form-control w-50 me-2"
+          type="text"
+          placeholder="Search images..."
+          value={ query }
+          onChange={( e ) => setQuery(e.target.value)}
+        />
+        <button className="btn btn-light">Search</button>
+      </form>
+
+      <div className="row g-3">
+        {images.map(( img ) => (
+          <div className="col-6 col-md-4 col-lg-3" key={ img.id }>
+            <div className="card image-card shadow-sm">
+              <img src={ img.urls.small } className="card-img-top gallery-img" alt="img" />
+              <div className="card-body p-2">
+                <small className="text-muted text-center d-block">{ img.user.name }</small>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center mt-4">
+        <button className="btn btn-primary" onClick={() => setPage( page + 1 )}>
+          Load More
+        </button>
+      </div>
     </div>
   );
 };
